@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Apps Using Ensembles</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Apps that use the Ensembles sync framework for Core Data and SwiftData. From award-winning finance apps to music tools with millions of users.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="The Mental Faculty B.V.">
+  <meta property="og:title" content="Apps Using Ensembles">
+  <meta property="og:description" content="From award-winning finance apps to music tools with millions of users — apps that trust Ensembles for sync.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/hero.png">
+  <meta property="og:url" content="https://ensembles.io/apps.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Apps Using Ensembles">
+  <meta name="twitter:description" content="From award-winning finance apps to music tools with millions of users — apps that trust Ensembles for sync.">
+  <link rel="canonical" href="https://ensembles.io/apps.html">
+  <link rel="icon" type="image/png" href="images/logo.png">
+
+  <style>
+    :root {
+      --accent: #A855F7;
+      --accent2: #7b68c8;
+      --bg: #0a0a0a;
+      --bg-card: rgba(255, 255, 255, 0.05);
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #ffffff;
+      --text-muted: #b0b0b0;
+      --text-dim: #888888;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8f9fa;
+        --bg-card: rgba(0, 0, 0, 0.03);
+        --border: rgba(0, 0, 0, 0.1);
+        --text: #1a1a1a;
+        --text-muted: #555555;
+        --text-dim: #888888;
+      }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    header {
+      background: rgba(10, 10, 10, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    @media (prefers-color-scheme: light) {
+      header { background: rgba(248, 249, 250, 0.9); }
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      gap: 0.6rem;
+      letter-spacing: 0.02em;
+    }
+
+    .logo img { height: 48px; width: auto; }
+
+    nav { display: flex; gap: 0.5rem; }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      font-size: 0.95rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+    }
+
+    nav a:hover { opacity: 1; }
+
+    nav a.nav-cta {
+      background: var(--accent);
+      color: #fff;
+      opacity: 1;
+      font-weight: 600;
+    }
+
+    nav a.nav-cta:hover {
+      background: #9333ea;
+    }
+
+    .page-title {
+      padding: 4rem 0 2rem;
+      text-align: center;
+    }
+
+    .page-title h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .page-title p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-top: 0.8rem;
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+      padding-bottom: 4rem;
+    }
+
+    .app-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .app-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .app-card img {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+
+    .app-info h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .app-info p {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      line-height: 1.4;
+      margin-top: 0.2rem;
+    }
+
+    footer {
+      color: var(--text-dim);
+      padding: 3rem 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      margin: 0 0.8rem;
+    }
+
+    footer a:hover { text-decoration: underline; }
+    footer .links { margin-top: 0.8rem; }
+
+    @media (max-width: 768px) {
+      .header-content { flex-direction: column; gap: 0.8rem; }
+      nav { gap: 0.2rem; }
+      nav a { padding: 0.3rem 0.6rem; font-size: 0.85rem; }
+      .page-title h1 { font-size: 1.8rem; }
+      .apps-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+      .app-card { padding: 1rem; }
+      .app-card img { width: 44px; height: 44px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <img src="images/logo-nav.png" alt="Ensembles">
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="news.html">News</a>
+        <a href="apps.html">Apps</a>
+        <a href="faq.html">FAQ</a>
+        <a href="https://github.com/mentalfaculty/Ensembles3">GitHub</a>
+        <a href="https://ensembles-licenses.fly.dev/portal" class="nav-cta">License Portal</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="page-title">
+        <h1>Apps Using Ensembles</h1>
+        <p>From award-winning finance apps to music tools with millions of users.</p>
+      </div>
+
+      <div class="apps-grid">
+        <div class="app-card">
+          <img src="images/apps/pennies.png" alt="Pennies">
+          <div class="app-info">
+            <h3>Pennies</h3>
+            <p>Award-winning personal finance app</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/happy-scale.png" alt="Happy Scale">
+          <div class="app-info">
+            <h3>Happy Scale</h3>
+            <p>Weight tracking with moving averages</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/money-pro.png" alt="Money Pro">
+          <div class="app-info">
+            <h3>Money Pro</h3>
+            <p>Personal finance management</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/ireal-pro.png" alt="iReal Pro">
+          <div class="app-info">
+            <h3>iReal Pro</h3>
+            <p>Chord charts and practice tool</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/yokee.png" alt="Yokee">
+          <div class="app-info">
+            <h3>Yokee</h3>
+            <p>Karaoke app with 70M+ users</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/atracker.png" alt="ATracker">
+          <div class="app-info">
+            <h3>ATracker</h3>
+            <p>Time tracking with minimal setup</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/grid-diary.png" alt="Grid Diary">
+          <div class="app-info">
+            <h3>Grid Diary</h3>
+            <p>Simplified journaling</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/contractor-tools.png" alt="ContractorTools">
+          <div class="app-info">
+            <h3>ContractorTools</h3>
+            <p>Construction estimates and invoicing</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/nihongo.png" alt="Nihongo">
+          <div class="app-info">
+            <h3>Nihongo</h3>
+            <p>Japanese dictionary and study tool</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/ikiru.png" alt="Ikiru">
+          <div class="app-info">
+            <h3>Ikiru</h3>
+            <p>Lists, notes, and reminders</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/feevy.png" alt="Feevy">
+          <div class="app-info">
+            <h3>Feevy</h3>
+            <p>Fever tracking for families</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/chord.png" alt="Chord!">
+          <div class="app-info">
+            <h3>Chord!</h3>
+            <p>Guitar chords and scales</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/tasker.png" alt="Tasker">
+          <div class="app-info">
+            <h3>Tasker</h3>
+            <p>Task management and productivity</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/focus-time.png" alt="Focus Time">
+          <div class="app-info">
+            <h3>Focus Time</h3>
+            <p>Activity timer and Pomodoro</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/easy-hours.png" alt="Easy Hours">
+          <div class="app-info">
+            <h3>Easy Hours</h3>
+            <p>Freelancer hour tracking</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/taptile.png" alt="Taptile Timetracking">
+          <div class="app-info">
+            <h3>Taptile Timetracking</h3>
+            <p>Multi-platform time tracking</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/iallowance.png" alt="iAllowance">
+          <div class="app-info">
+            <h3>iAllowance</h3>
+            <p>Allowances and chore charts</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/mealplan.png" alt="MealPlan">
+          <div class="app-info">
+            <h3>MealPlan</h3>
+            <p>Weekly meal and grocery planning</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/studies.png" alt="Studies">
+          <div class="app-info">
+            <h3>Studies</h3>
+            <p>Flashcard app for students</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/ivocabulary.png" alt="iVocabulary">
+          <div class="app-info">
+            <h3>iVocabulary</h3>
+            <p>Vocabulary learning and management</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/home-contents.png" alt="Home Contents">
+          <div class="app-info">
+            <h3>Home Contents</h3>
+            <p>Belongings inventory cataloging</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/giftplanner.png" alt="GiftPlanner">
+          <div class="app-info">
+            <h3>GiftPlanner</h3>
+            <p>Gift list organizer</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/savings.png" alt="Savings">
+          <div class="app-info">
+            <h3>GreenBooks</h3>
+            <p>Money management for Mac and iPhone</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/moon-invoice-pro.png" alt="Moon Invoice Pro">
+          <div class="app-info">
+            <h3>Moon: Bills</h3>
+            <p>Invoicing for small business</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/writing-shed.png" alt="Writing Shed">
+          <div class="app-info">
+            <h3>Writing Shed</h3>
+            <p>Designed for writers</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/story-planner.png" alt="Story Planner">
+          <div class="app-info">
+            <h3>Story Planner</h3>
+            <p>Story outlining for writers</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/targetscan.png" alt="TargetScan">
+          <div class="app-info">
+            <h3>TargetScan</h3>
+            <p>Pistol and rifle target scoring</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/intelli-flashcards.png" alt="Intelli Flashcards">
+          <div class="app-info">
+            <h3>Intelli Flashcards</h3>
+            <p>Self-written flashcard management</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/colouring.png" alt="Colo(u)ring">
+          <div class="app-info">
+            <h3>Colo(u)ring</h3>
+            <p>Digital coloring book</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/smartshare.png" alt="SmartShare Mobile">
+          <div class="app-info">
+            <h3>SmartShare Mobile</h3>
+            <p>Collaborative software suite</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/moviebuddy.png" alt="MovieBuddy">
+          <div class="app-info">
+            <h3>MovieBuddy</h3>
+            <p>Movie library management</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/bookbuddy.png" alt="BookBuddy">
+          <div class="app-info">
+            <h3>BookBuddy</h3>
+            <p>Book library management</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/musicbuddy.png" alt="MusicBuddy">
+          <div class="app-info">
+            <h3>MusicBuddy</h3>
+            <p>Music album management</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/diabetespal.png" alt="DiabetesPal">
+          <div class="app-info">
+            <h3>DiabetesPal</h3>
+            <p>Diabetes management</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <img src="images/apps/moon-invoice.png" alt="Moon Invoice">
+          <div class="app-info">
+            <h3>Moon Invoice</h3>
+            <p>Invoicing for small business (macOS)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 The Mental Faculty B.V. &middot; Amstelveen, Netherlands</p>
+      <div class="links">
+        <a href="https://github.com/mentalfaculty/Ensembles3">GitHub</a>
+        <a href="https://ensembles-licenses.fly.dev/portal">License Portal</a>
+        <a href="mailto:info@mentalfaculty.com">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

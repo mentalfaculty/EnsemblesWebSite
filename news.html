@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>News — Ensembles</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="News and updates about Ensembles, the local-first sync framework for Core Data and SwiftData.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="The Mental Faculty B.V.">
+  <meta property="og:title" content="News — Ensembles">
+  <meta property="og:description" content="News and updates about Ensembles, the local-first sync framework for Core Data and SwiftData.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/hero.png">
+  <meta property="og:url" content="https://ensembles.io/news.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="News — Ensembles">
+  <meta name="twitter:description" content="News and updates about Ensembles, the local-first sync framework for Core Data and SwiftData.">
+  <link rel="canonical" href="https://ensembles.io/news.html">
+  <link rel="icon" type="image/png" href="images/logo.png">
+
+  <style>
+    :root {
+      --accent: #A855F7;
+      --accent2: #7b68c8;
+      --bg: #0a0a0a;
+      --bg-card: rgba(255, 255, 255, 0.05);
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #ffffff;
+      --text-muted: #b0b0b0;
+      --text-dim: #888888;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8f9fa;
+        --bg-card: rgba(0, 0, 0, 0.03);
+        --border: rgba(0, 0, 0, 0.1);
+        --text: #1a1a1a;
+        --text-muted: #555555;
+        --text-dim: #888888;
+      }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    header {
+      background: rgba(10, 10, 10, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    @media (prefers-color-scheme: light) {
+      header { background: rgba(248, 249, 250, 0.9); }
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      gap: 0.6rem;
+      letter-spacing: 0.02em;
+    }
+
+    .logo img { height: 48px; width: auto; }
+
+    nav { display: flex; gap: 0.5rem; }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      font-size: 0.95rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+    }
+
+    nav a:hover { opacity: 1; }
+
+    nav a.nav-cta {
+      background: var(--accent);
+      color: #fff;
+      opacity: 1;
+      font-weight: 600;
+    }
+
+    nav a.nav-cta:hover { background: #9333ea; }
+
+    .page-title {
+      padding: 4rem 0 2rem;
+      text-align: center;
+    }
+
+    .page-title h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .post {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .post-date {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.8rem;
+    }
+
+    .post h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      line-height: 1.3;
+    }
+
+    .post p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .post p:last-child { margin-bottom: 0; }
+
+    .post a { color: var(--accent); }
+    .post a:hover { text-decoration: underline; }
+
+    .post ul {
+      color: var(--text-muted);
+      margin: 0.5rem 0 1rem 1.5rem;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .post ul li { padding: 0.2rem 0; }
+
+    footer {
+      color: var(--text-dim);
+      padding: 3rem 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      margin: 0 0.8rem;
+    }
+
+    footer a:hover { text-decoration: underline; }
+    footer .links { margin-top: 0.8rem; }
+
+    @media (max-width: 768px) {
+      .header-content { flex-direction: column; gap: 0.8rem; }
+      nav { gap: 0.2rem; }
+      nav a { padding: 0.3rem 0.6rem; font-size: 0.85rem; }
+      .page-title h1 { font-size: 1.8rem; }
+      .post { padding: 1.5rem; }
+      .post h2 { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <img src="images/logo-nav.png" alt="Ensembles">
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="news.html">News</a>
+        <a href="apps.html">Apps</a>
+        <a href="faq.html">FAQ</a>
+        <a href="https://github.com/mentalfaculty/Ensembles3">GitHub</a>
+        <a href="https://ensembles-licenses.fly.dev/portal" class="nav-cta">License Portal</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="page-title">
+        <h1>News</h1>
+      </div>
+
+      <article class="post">
+        <div class="post-date">March 2026</div>
+        <h2>Ensembles 3: Local-First Comes to SwiftData</h2>
+        <p>
+          We're excited to announce Ensembles 3 &mdash; a complete rewrite of the Ensembles sync framework in Swift 6, with first-class support for SwiftData alongside Core Data.
+        </p>
+        <p>
+          Ensembles has always been about a simple idea: your app's data belongs to your customers, stored in the cloud services they already use. No custom server. No vendor lock-in. No recurring cloud costs for developers. With Ensembles 3, that local-first philosophy now extends to Apple's newest persistence framework.
+        </p>
+        <p><strong>What's new in Ensembles 3:</strong></p>
+        <ul>
+          <li><strong>SwiftData support</strong> &mdash; <code>SwiftDataEnsemble</code> syncs your <code>@Model</code> types without needing a <code>.xcdatamodeld</code> file</li>
+          <li><strong>Pure Swift 6</strong> &mdash; async/await throughout, full strict concurrency, no Objective-C</li>
+          <li><strong>12 cloud backends</strong> &mdash; CloudKit, Dropbox, Google Drive, OneDrive, pCloud, Amazon S3, WebDAV, Box, plus encryption, P2P, and local file</li>
+          <li><strong>New backends</strong> &mdash; Google Drive, OneDrive, and pCloud via direct REST APIs (no vendor SDKs required)</li>
+          <li><strong>End-to-end encryption</strong> &mdash; wrap any backend with the encrypted cloud file system</li>
+          <li><strong>Model versioning</strong> &mdash; works with SwiftData <code>VersionedSchema</code> and Core Data model versions</li>
+          <li><strong>Backwards compatible</strong> &mdash; reads Ensembles 2 cloud data and event stores</li>
+        </ul>
+        <p>
+          CloudKit and local file sync are free and always will be. For access to all backends, subscriptions start at <a href="/#pricing">$99/year for unlimited apps</a>. A <a href="https://ensembles-licenses.fly.dev/portal/trial">free 1-month trial</a> is available.
+        </p>
+        <p>
+          Get started at <a href="https://github.com/mentalfaculty/Ensembles3">github.com/mentalfaculty/Ensembles3</a>.
+        </p>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 The Mental Faculty B.V. &middot; Amstelveen, Netherlands</p>
+      <div class="links">
+        <a href="https://github.com/mentalfaculty/Ensembles3">GitHub</a>
+        <a href="https://ensembles-licenses.fly.dev/portal">License Portal</a>
+        <a href="mailto:info@mentalfaculty.com">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

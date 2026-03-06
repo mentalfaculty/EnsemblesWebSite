@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ensembles — Sync Your App Across Apple Devices</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The local-first sync framework for Core Data and SwiftData. Sync via iCloud, Dropbox, Google Drive, OneDrive, and more. No server required. No cloud costs. No lock-in.">
+  <meta name="keywords" content="local-first, Core Data sync, SwiftData sync, iOS sync framework, macOS sync, iCloud sync, Dropbox sync, CloudKit sync, Swift sync framework, peer-to-peer sync, offline-first, Apple developer tools">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="The Mental Faculty B.V.">
+  <meta property="og:title" content="Ensembles — Sync Your App Across Apple Devices">
+  <meta property="og:description" content="The local-first sync framework for Apple platforms. Sync via existing cloud services. No server required. No cloud costs.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/hero.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ensembles — Sync Your App Across Apple Devices">
+  <meta name="twitter:description" content="The local-first sync framework for Apple platforms. Sync via existing cloud services. No server required. No cloud costs.">
+  <meta property="og:url" content="https://ensembles.io/">
+  <link rel="canonical" href="https://ensembles.io/">
+  <link rel="icon" type="image/png" href="images/logo.png">
+
+  <style>
+    :root {
+      --accent: #A855F7;
+      --accent2: #7b68c8;
+      --bg: #0a0a0a;
+      --bg-alt: #111111;
+      --bg-card: rgba(255, 255, 255, 0.05);
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #ffffff;
+      --text-muted: #b0b0b0;
+      --text-dim: #888888;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8f9fa;
+        --bg-alt: #ffffff;
+        --bg-card: rgba(0, 0, 0, 0.03);
+        --border: rgba(0, 0, 0, 0.1);
+        --text: #1a1a1a;
+        --text-muted: #555555;
+        --text-dim: #888888;
+      }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* --- Header --- */
+
+    header {
+      background: rgba(10, 10, 10, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    @media (prefers-color-scheme: light) {
+      header {
+        background: rgba(248, 249, 250, 0.9);
+      }
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      gap: 0.6rem;
+      letter-spacing: 0.02em;
+    }
+
+    .logo img {
+      height: 48px;
+      width: auto;
+    }
+
+    nav { display: flex; gap: 0.5rem; }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      font-size: 0.95rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+    }
+
+    nav a:hover { opacity: 1; }
+
+    nav a.nav-cta {
+      background: var(--accent);
+      color: #fff;
+      opacity: 1;
+      font-weight: 600;
+    }
+
+    nav a.nav-cta:hover { background: #9333ea; }
+
+    /* --- Hero --- */
+
+    .hero {
+      text-align: center;
+      padding: 7rem 0 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, rgba(123, 104, 200, 0.08) 40%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-img {
+      max-width: 850px;
+      width: 100%;
+      border-radius: 16px;
+      margin-bottom: 3rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (prefers-color-scheme: light) {
+      .hero-img { box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); }
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      line-height: 1.15;
+      background: linear-gradient(135deg, #6BA3D6 0%, #A855F7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 2.5rem;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 1.8rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    /* --- Sections --- */
+
+    section {
+      padding: 5rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    section h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 3.5rem;
+    }
+
+    /* --- Features --- */
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      padding: 2rem;
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+    }
+
+    .feature-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.6rem;
+      font-weight: 600;
+    }
+
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .feature-icon {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+      width: 2.6rem;
+      height: 2.6rem;
+      line-height: 2.6rem;
+      text-align: center;
+      border-radius: 10px;
+      background: rgba(91, 196, 198, 0.1);
+      box-shadow: inset 0 0 12px rgba(91, 196, 198, 0.3);
+      filter: grayscale(1) brightness(1.2) sepia(1) hue-rotate(140deg) saturate(2);
+      opacity: 0.7;
+    }
+
+    /* --- Backends --- */
+
+    .backends-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .backend-card {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+    }
+
+    .backend-card .name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .backend-card .tag {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .backend-card .tag.paid {
+      color: var(--accent2);
+    }
+
+    /* --- Trusted By --- */
+
+    .trusted {
+      text-align: center;
+    }
+
+    .trusted h2 {
+      margin-bottom: 2.5rem;
+    }
+
+    .trusted-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem 1.5rem;
+    }
+
+    .trusted-logos img {
+      height: 64px;
+      width: auto;
+      border-radius: 14px;
+    }
+
+    /* --- Testimonials --- */
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .testimonial-card {
+      padding: 1.8rem;
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+    }
+
+    .testimonial-card blockquote {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .testimonial-card .attribution {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      font-weight: 600;
+    }
+
+    .testimonial-card .attribution .app {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration: none;
+    }
+
+    .testimonial-card .attribution .app:hover {
+      text-decoration: underline;
+    }
+
+    /* --- Pricing --- */
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .price-card {
+      padding: 2.5rem;
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .price-card.featured {
+      border-color: var(--accent);
+      position: relative;
+    }
+
+    .price-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .price-card .price {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin: 1rem 0 0.3rem;
+    }
+
+    .price-card .period {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .price-card ul {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 2rem;
+      flex: 1;
+    }
+
+    .price-card ul li {
+      padding: 0.4rem 0;
+      padding-left: 1.4em;
+      position: relative;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .price-card ul li::before {
+      content: "\2713";
+      color: var(--accent);
+      font-weight: 700;
+      position: absolute;
+      left: 0;
+    }
+
+    .price-card .btn {
+      width: 100%;
+      text-align: center;
+    }
+
+    .pricing-note {
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      margin-top: 1.5rem;
+    }
+
+    /* --- Code --- */
+
+    .code-section {
+      text-align: center;
+    }
+
+    .code-block {
+      background: #1a1a1a;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: left;
+      overflow-x: auto;
+    }
+
+    @media (prefers-color-scheme: light) {
+      .code-block {
+        background: #1e1e2e;
+      }
+    }
+
+    .code-block pre {
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #e0e0e0;
+    }
+
+    .code-block .kw { color: #c678dd; }
+    .code-block .fn { color: #61afef; }
+    .code-block .str { color: #98c379; }
+    .code-block .cm { color: #5c6370; font-style: italic; }
+    .code-block .ty { color: #e5c07b; }
+    .code-block .pr { color: #56b6c2; }
+
+    /* --- About --- */
+
+    .about-text {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* --- Footer --- */
+
+    footer {
+      background: var(--bg);
+      color: var(--text-dim);
+      padding: 3rem 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      margin: 0 0.8rem;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    footer .links { margin-top: 0.8rem; }
+
+    /* --- Mobile --- */
+
+    @media (max-width: 768px) {
+      .hero { padding: 4rem 0 3rem; }
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1.05rem; }
+      section { padding: 3.5rem 0; }
+      section h2 { font-size: 1.8rem; }
+      .header-content { flex-direction: column; gap: 0.8rem; }
+      nav { gap: 0.2rem; }
+      nav a { padding: 0.3rem 0.6rem; font-size: 0.85rem; }
+      .backends-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-cards { grid-template-columns: 1fr; }
+      .trusted-logos img { height: 48px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">
+          <img src="images/logo-nav.png" alt="Ensembles">
+        </a>
+        <nav>
+          <a href="#features">Features</a>
+          <a href="#backends">Backends</a>
+          <a href="#pricing">Pricing</a>
+          <a href="news.html">News</a>
+          <a href="apps.html">Apps</a>
+          <a href="faq.html">FAQ</a>
+          <a href="https://github.com/mentalfaculty/Ensembles3">GitHub</a>
+          <a href="https://ensembles-licenses.fly.dev/portal" class="nav-cta">License Portal</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" style="border-top: none;">
+      <div class="container">
+        <img src="images/hero.png" alt="Ensembles — Sync different." class="hero-img">
+        <h1>Sync Your App Across Apple Devices</h1>
+        <p>The local-first sync framework for SwiftData and Core Data. No server to build. No cloud costs. No vendor lock-in.</p>
+        <div class="hero-buttons">
+          <a href="https://github.com/mentalfaculty/Ensembles3" class="btn btn-primary">Get Started</a>
+          <a href="https://ensembles-licenses.fly.dev/portal/trial" class="btn btn-secondary">Free Trial</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trusted By -->
+    <section class="trusted">
+      <h2>Trusted by iOS Devs Since 2013</h2>
+      <div class="trusted-logos">
+        <a href="https://apps.apple.com/us/app/pennies-budget-bill-tracker/id916741290" target="_blank"><img src="images/apps/pennies.png" alt="Pennies" title="Pennies"></a>
+        <a href="https://apps.apple.com/us/app/happy-scale/id532430574" target="_blank"><img src="images/apps/happy-scale.png" alt="Happy Scale" title="Happy Scale"></a>
+        <a href="https://apps.apple.com/us/app/money-pro-personal-finance-ar/id918609651" target="_blank"><img src="images/apps/money-pro.png" alt="Money Pro" title="Money Pro"></a>
+        <a href="https://apps.apple.com/us/app/ireal-pro/id298206806" target="_blank"><img src="images/apps/ireal-pro.png" alt="iReal Pro" title="iReal Pro"></a>
+        <a href="https://apps.apple.com/us/app/atracker-time-tracker/id522008611" target="_blank"><img src="images/apps/atracker.png" alt="ATracker" title="ATracker"></a>
+        <a href="https://apps.apple.com/us/app/grid-diary-journal-planner/id1392523148" target="_blank"><img src="images/apps/grid-diary.png" alt="Grid Diary" title="Grid Diary"></a>
+        <a href="https://apps.apple.com/us/app/contractortools/id707055968" target="_blank"><img src="images/apps/contractor-tools.png" alt="ContractorTools" title="ContractorTools"></a>
+        <a href="https://apps.apple.com/us/app/nihongo-japanese-dictionary/id881697245" target="_blank"><img src="images/apps/nihongo.png" alt="Nihongo" title="Nihongo"></a>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section>
+      <h2>What Developers Say</h2>
+      <div class="container">
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <blockquote>&ldquo;80% of my support emails vanished once I finally added sync. I&rsquo;m shocked that such a new product could behave like such a mature product!!&rdquo;</blockquote>
+            <div class="attribution">Russ Shanahan &mdash; <a href="https://apps.apple.com/us/app/happy-scale/id532430574" target="_blank" class="app">Happy Scale</a></div>
+          </div>
+          <div class="testimonial-card">
+            <blockquote>&ldquo;All I get are happy customers. Quite a few of them are wondering why the sync works so smoothly compared to other apps.&rdquo;</blockquote>
+            <div class="attribution">Lars Gerckens &mdash; <a href="https://www.tyme-app.com" target="_blank" class="app">Tyme</a></div>
+          </div>
+          <div class="testimonial-card">
+            <blockquote>&ldquo;After wasting months on Core Data&ndash;iCloud, all solved by Ensembles. Incredibly well thought out.&rdquo;</blockquote>
+            <div class="attribution">Kyle Baxter</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features">
+      <h2>Why Ensembles</h2>
+      <p class="section-sub">The only sync framework that works with the cloud services your customers already have.</p>
+      <div class="container">
+        <div class="features-grid">
+          <div class="feature-card">
+            <span class="feature-icon">&#x2601;&#xFE0F;</span>
+            <h3>Sync via Existing Services</h3>
+            <p>iCloud, Dropbox, Google Drive, OneDrive, pCloud, S3, WebDAV &mdash; sync through cloud storage your customers already own. No cloud infrastructure to deploy or pay for.</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">&#x1F6E1;&#xFE0F;</span>
+            <h3>Your Customers Own Their Data</h3>
+            <p>Data lives in your customers' own cloud accounts as opaque files no server can read. No backend to build, maintain, or pay for. Zero recurring cloud costs.</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">&#x1F513;</span>
+            <h3>No Lock-In</h3>
+            <p>Let your customers choose which cloud service to use. Switch backends without changing your app logic. You&rsquo;re never tied to a single vendor.</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">&#x1F9E9;</span>
+            <h3>Advanced Merging &amp; Validation</h3>
+            <p>Sophisticated conflict resolution with revision tracking and causal ordering. Delegate hooks let you validate and customize every merge.</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">&#x1F512;</span>
+            <h3>End-to-End Encryption</h3>
+            <p>AES-256-GCM encryption before data leaves the device. Works with any backend &mdash; no need to rely on Apple&rsquo;s Advanced Data Protection.</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">&#x1F504;</span>
+            <h3>Core Data &amp; SwiftData</h3>
+            <p>Works with both Core Data and SwiftData. Drop in a few lines of code and your existing data model syncs across all Apple platforms.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Start -->
+    <section class="code-section" id="quickstart">
+      <h2>Sync with EASE</h2>
+      <p class="section-sub">Ensemble, Attach, Sync, Enjoy. Four steps to cross-device bliss.</p>
+      <div class="container">
+        <div class="code-block">
+<pre><span class="cm">// Create the ensemble once at app launch</span>
+<span class="kw">let</span> ensemble = <span class="ty">SwiftDataEnsemble</span>(
+    ensembleIdentifier: <span class="str">"MyStore"</span>,
+    modelTypes: [<span class="ty">Item</span>.<span class="kw">self</span>],
+    cloudFileSystem: <span class="ty">CloudKitFileSystem</span>(
+        ubiquityContainerID: <span class="str">"iCloud.com.example.myapp"</span>
+    )
+)
+
+<span class="cm">// Attach once for a new install</span>
+<span class="kw">try await</span> ensemble.<span class="fn">attachPersistentStore</span>()
+
+<span class="cm">// Sync whenever you like — uploads local changes, downloads remote</span>
+<span class="kw">try await</span> ensemble.<span class="fn">sync</span>()</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Backends -->
+    <section id="backends">
+      <h2>Cloud Backends</h2>
+      <p class="section-sub">CloudKit and local sync are free forever. A $99/year subscription unlocks all other backends.</p>
+      <div class="container">
+        <div class="backends-grid">
+          <div class="backend-card">
+            <div class="name">CloudKit</div>
+            <div class="tag">Free</div>
+          </div>
+          <div class="backend-card">
+            <div class="name">Local File</div>
+            <div class="tag">Free</div>
+          </div>
+          <div class="backend-card">
+            <div class="name">Dropbox</div>
+            <div class="tag paid">Subscription</div>
+          </div>
+          <div class="backend-card">
+            <div class="name">Google Drive</div>
+            <div class="tag paid">Subscription</div>
+          </div>
+          <div class="backend-card">
+            <div class="name">OneDrive</div>
+            <div class="tag paid">Subscription</div>
+          </div>
+          <div class="backend-card">
+            <div class="name">pCloud</div>
+            <div class="tag paid">Subscription</div>
+          </div>
+          <div class="backend-card">
+            <div class="name">Amazon S3</div>
+            <div class="tag paid">Subscription</div>
+          </div>
+          <div class="backend-card">
+            <div class="name">WebDAV</div>
+            <div class="tag paid">Subscription</div>
+          </div>
+          <div class="backend-card">
+            <div class="name">Box</div>
+            <div class="tag paid">Subscription</div>
+          </div>
+          <div class="backend-card">
+            <div class="name">Encrypted</div>
+            <div class="tag paid">Subscription</div>
+          </div>
+          <div class="backend-card">
+            <div class="name">Peer-to-Peer</div>
+            <div class="tag paid">Subscription</div>
+          </div>
+          <div class="backend-card">
+            <div class="name">Custom</div>
+            <div class="tag paid">Subscription</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who Built This -->
+    <section>
+      <h2>Who Built This</h2>
+      <div class="container">
+        <p class="about-text">The Mental Faculty has been developing apps and frameworks for Apple devices since 2006, even preceding the iPhone. Ensembles has been a commercial sync framework since 2013, and is trusted by hundreds of apps on the App Store.</p>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing">
+      <h2>Simple Pricing</h2>
+      <p class="section-sub">CloudKit sync is completely free. No per-app, per-user, or per-device fees.</p>
+      <div class="container">
+        <div class="pricing-cards">
+          <div class="price-card">
+            <h3>Free</h3>
+            <div class="price">$0</div>
+            <div class="period">forever</div>
+            <ul>
+              <li>Core Data &amp; SwiftData sync</li>
+              <li>CloudKit backend</li>
+              <li>Local file backend</li>
+              <li>All Apple platforms</li>
+              <li>Community support via GitHub</li>
+            </ul>
+            <a href="https://github.com/mentalfaculty/Ensembles3" class="btn btn-secondary">Get Started</a>
+          </div>
+          <div class="price-card featured">
+            <h3>Basic</h3>
+            <div class="price">$99</div>
+            <div class="period">per year &middot; unlimited apps &middot; for indie developers</div>
+            <ul>
+              <li>Everything in Free</li>
+              <li>Dropbox, Google Drive, OneDrive</li>
+              <li>pCloud, S3, WebDAV, Box</li>
+              <li>Encryption &amp; Peer-to-Peer</li>
+              <li>Custom backends</li>
+              <li>Email support</li>
+              <li>1-month free trial</li>
+            </ul>
+            <a href="https://buy.paddle.com/product/922601" class="btn btn-primary">Subscribe</a>
+          </div>
+          <div class="price-card">
+            <h3>Premium</h3>
+            <div class="price">$499</div>
+            <div class="period">per year &middot; unlimited apps &middot; for teams &amp; businesses</div>
+            <ul>
+              <li>Everything in Basic</li>
+              <li>Full source code access</li>
+              <li>Debug and extend with full source visibility</li>
+              <li>Improve LLM coding with source access</li>
+              <li>Business continuity &mdash; no dependency on a third party</li>
+              <li>Code-level support</li>
+            </ul>
+            <a href="https://buy.paddle.com/product/922625" class="btn btn-secondary">Subscribe</a>
+          </div>
+        </div>
+        <p class="pricing-note">You get access to all versions of the SDK released while subscribed, and can continue to use those versions even if your subscription ends.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 The Mental Faculty B.V. &middot; Amstelveen, Netherlands</p>
+      <div class="links">
+        <a href="https://github.com/mentalfaculty/Ensembles3">GitHub</a>
+        <a href="https://ensembles-licenses.fly.dev/portal">License Portal</a>
+        <a href="mailto:info@mentalfaculty.com">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
