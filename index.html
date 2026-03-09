@@ -452,6 +452,55 @@
       margin-top: 1.5rem;
     }
 
+    /* --- Comparison Table --- */
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comparison-table th {
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .comparison-table th:first-child {
+      color: var(--text);
+    }
+
+    .comparison-table td:first-child {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .comparison-table td.yes {
+      color: #4ade80;
+    }
+
+    .comparison-table td.no {
+      color: var(--text-dim);
+    }
+
+    .comparison-table td.na {
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    @media (prefers-color-scheme: light) {
+      .comparison-table td.yes { color: #16a34a; }
+    }
+
     /* --- Code --- */
 
     .code-section {
@@ -547,6 +596,7 @@
         </a>
         <nav>
           <a href="#features">Features</a>
+          <a href="#comparison">Compare</a>
           <a href="#backends">Backends</a>
           <a href="#pricing">Pricing</a>
           <a href="news.html">News</a>
@@ -645,6 +695,100 @@
             <h3>Core Data &amp; SwiftData</h3>
             <p>Works with both Core Data and SwiftData. Drop in a few lines of code and your existing data model syncs across all Apple platforms.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison -->
+    <section id="comparison">
+      <h2>Ensembles vs Apple CloudKit Sync</h2>
+      <p class="section-sub">Apple's built-in sync ties you to CloudKit. Ensembles gives you freedom.</p>
+      <div class="container">
+        <div style="overflow-x: auto;">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Ensembles</th>
+                <th>Core Data + CloudKit</th>
+                <th>SwiftData + CloudKit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cloud backends</td>
+                <td class="yes">Any (13 built-in + custom)</td>
+                <td class="no">CloudKit only</td>
+                <td class="no">CloudKit only</td>
+              </tr>
+              <tr>
+                <td>Custom backends</td>
+                <td class="yes">Yes (8-method protocol)</td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+              </tr>
+              <tr>
+                <td>Vendor lock-in</td>
+                <td class="yes">None &mdash; switch backends freely</td>
+                <td class="no">Locked to Apple</td>
+                <td class="no">Locked to Apple</td>
+              </tr>
+              <tr>
+                <td>Conflict resolution</td>
+                <td class="yes">Revision tracking + delegate hooks</td>
+                <td class="no">Last-writer-wins</td>
+                <td class="no">Last-writer-wins</td>
+              </tr>
+              <tr>
+                <td>Ordered relationships</td>
+                <td class="yes">Yes</td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+              </tr>
+              <tr>
+                <td>Validation rules</td>
+                <td class="yes">Fully preserved</td>
+                <td class="no">Relaxed</td>
+                <td class="no">All properties optional</td>
+              </tr>
+              <tr>
+                <td>Global identity / dedup</td>
+                <td class="yes">Built-in</td>
+                <td class="no">Manual</td>
+                <td class="no">Manual</td>
+              </tr>
+              <tr>
+                <td>E2E encryption</td>
+                <td class="yes">Built-in (AES-256-GCM)</td>
+                <td class="no">Requires ADP</td>
+                <td class="no">Requires ADP</td>
+              </tr>
+              <tr>
+                <td>Peer-to-peer sync</td>
+                <td class="yes">Yes (MultipeerConnectivity)</td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+              </tr>
+              <tr>
+                <td>Source available</td>
+                <td class="yes">Yes (Premium license)</td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+              </tr>
+              <tr>
+                <td>Core Data support</td>
+                <td class="yes">Yes</td>
+                <td class="yes">Yes</td>
+                <td class="na">N/A</td>
+              </tr>
+              <tr>
+                <td>SwiftData support</td>
+                <td class="yes">Yes</td>
+                <td class="na">N/A</td>
+                <td class="yes">Yes</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
