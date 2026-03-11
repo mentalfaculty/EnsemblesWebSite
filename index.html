@@ -349,6 +349,8 @@
       border-radius: 12px;
       background: var(--bg-card);
       border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
     }
 
     .testimonial-card blockquote {
@@ -363,6 +365,7 @@
       font-size: 0.85rem;
       color: var(--text-dim);
       font-weight: 600;
+      margin-top: auto;
     }
 
     .testimonial-card .attribution .app {
@@ -627,6 +630,7 @@
     <section class="trusted">
       <h2>Trusted by iOS Devs Since 2013</h2>
       <div class="trusted-logos">
+        <a href="https://apps.apple.com/gb/app/moneywell-personal-budgeting/id6444531544" target="_blank"><img src="images/apps/moneywell.png" alt="MoneyWell" title="MoneyWell"></a>
         <a href="https://apps.apple.com/us/app/pennies-budget-bill-tracker/id916741290" target="_blank"><img src="images/apps/pennies.png" alt="Pennies" title="Pennies"></a>
         <a href="https://apps.apple.com/us/app/happy-scale/id532430574" target="_blank"><img src="images/apps/happy-scale.png" alt="Happy Scale" title="Happy Scale"></a>
         <a href="https://apps.apple.com/us/app/money-pro-personal-finance-ar/id918609651" target="_blank"><img src="images/apps/money-pro.png" alt="Money Pro" title="Money Pro"></a>
@@ -755,7 +759,7 @@
                 <td>Validation rules</td>
                 <td class="yes">Fully preserved</td>
                 <td class="no">Relaxed</td>
-                <td class="no">All properties optional</td>
+                <td class="no">All relationships optional</td>
               </tr>
               <tr>
                 <td>Object identity</td>
