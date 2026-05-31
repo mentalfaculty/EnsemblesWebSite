@@ -223,6 +223,44 @@
       </div>
 
       <article class="post">
+        <div class="post-date">May 2026</div>
+        <h2>Ensembles 3 is here</h2>
+        <p>
+          Ensembles was born of another era. When I started it, most apps were data silos. Your data lived on one device, and getting it onto another was a problem each developer solved &mdash; often badly &mdash; on their own. Apple took several shots at making syncing easier over the years, and didn't really crack it until relatively recently, with CloudKit sync for Core Data and SwiftData.
+        </p>
+        <p>
+          In the meantime, I had my own apps to sync, and I built a solution for them. I called it Ensembles, and I made it available to other developers. A lot of them took it up. For a native app developer it offered a native solution: no cloud infrastructure to run, no server code to write. Your app just synced through services your users already had, like iCloud, Dropbox, or WebDAV.
+        </p>
+        <p>
+          Then things changed. More and more moved to the cloud. Most apps became, in effect, interfaces to a cloud service. Even independent developers tended to start in the cloud and put a native interface on top. The Ensembles model became less fashionable, and I had more or less accepted that its best days were behind it.
+        </p>
+        <p>
+          A few years ago, that started to shift again. The web community got interested in local-first. They arrived at an approach strikingly similar to what Ensembles had been doing all along, only in the browser, with web technologies. Privacy was becoming a real concern, and a genuinely local-first design can be end-to-end encrypted, because the sync service never needs to understand your data. There was growing interest in decentralized data modeling.
+        </p>
+        <p>
+          I had wandered into this world more or less by accident, just trying to solve my own problem without paying for cloud infrastructure I didn't want. It turns out to be a good place to be: a growing community of like-minded people, glad to share what they know. And it felt like the right moment to ask whether Ensembles could still play a part.
+        </p>
+        <p>
+          So over the last few months I rewrote it in Swift, supported SwiftData, added more backends, and ran it through a long beta. It is ready. Today I am launching Ensembles 3.
+        </p>
+        <p>
+          If you don't know Ensembles, it is a framework for syncing Core Data and SwiftData across devices, through services like iCloud and Dropbox, or even peer-to-peer over a local network. Setup is usually a handful of lines, because Ensembles integrates with the native data model and store &mdash; using public APIs &mdash; to capture changes and merge conflicts for you. It is about as automated as sync gets. There is no lock-in to a particular service, unlike Apple's own solution, and you can encrypt your cloud data if you want to.
+        </p>
+        <p>
+          The free version gives you Ensembles sync via CloudKit, and local file storage for testing. It ships as a binary Swift package (XCFrameworks), and works on macOS, iOS, iPadOS, tvOS, watchOS, and visionOS.
+        </p>
+        <p>
+          For $99 a year, across unlimited apps, you can unlock all the backends, and the option to write your own, so Ensembles will work with practically any online storage. For $499 a year you get full access to the source code. Importantly, the license only restricts which versions of the framework you can build with &mdash; there is no runtime check. So your users will never be stuck with an app that doesn't sync because the license expired.
+        </p>
+        <p>
+          It has been a strange and satisfying journey: building something, watching the world move on, and then seeing it come back around to it. If local-first, private, decentralized data sounds like your kind of thing, I would love for you to give Ensembles 3 a try.
+        </p>
+        <p>
+          Get started at <a href="https://github.com/mentalfaculty/Ensembles3">github.com/mentalfaculty/Ensembles3</a>, or read more at <a href="/">ensembles.io</a>.
+        </p>
+      </article>
+
+      <article class="post">
         <div class="post-date">March 2026</div>
         <h2>Ensembles 3: Local-First Comes to SwiftData</h2>
         <p>
