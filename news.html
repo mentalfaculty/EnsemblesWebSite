@@ -144,11 +144,20 @@
       margin-bottom: 0.8rem;
     }
 
+    .post-date a { color: inherit; text-decoration: none; }
+    .post-date a:hover { text-decoration: underline; }
+
     .post h2 {
       font-size: 1.6rem;
       font-weight: 700;
-      margin-bottom: 1.2rem;
+      margin-bottom: 0.5rem;
       line-height: 1.3;
+    }
+
+    .post-byline {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
     }
 
     .post p {
@@ -222,9 +231,10 @@
         <h1>News</h1>
       </div>
 
-      <article class="post">
-        <div class="post-date">May 2026</div>
+      <article class="post" id="ensembles-3-launch">
+        <div class="post-date"><a href="#ensembles-3-launch">May 2026</a></div>
         <h2>Ensembles 3 is here</h2>
+        <div class="post-byline">by Drew McCormack</div>
         <p>
           Ensembles was born of another era. When I started it, most apps were data silos. Your data lived on one device, and getting it onto another was a problem each developer solved &mdash; often badly &mdash; on their own. Apple took several shots at making syncing easier over the years, and didn't really crack it until relatively recently, with CloudKit sync for Core Data and SwiftData.
         </p>
@@ -260,8 +270,8 @@
         </p>
       </article>
 
-      <article class="post">
-        <div class="post-date">March 2026</div>
+      <article class="post" id="ensembles-3-swiftdata">
+        <div class="post-date"><a href="#ensembles-3-swiftdata">March 2026</a></div>
         <h2>Ensembles 3: Local-First Comes to SwiftData</h2>
         <p>
           We're excited to announce Ensembles 3 &mdash; a complete rewrite of the Ensembles sync framework in Swift 6, with first-class support for SwiftData alongside Core Data.
